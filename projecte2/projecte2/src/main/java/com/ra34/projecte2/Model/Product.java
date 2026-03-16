@@ -1,4 +1,4 @@
-package com.ra34.projecte2.model;
+package com.ra34.projecte2.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
