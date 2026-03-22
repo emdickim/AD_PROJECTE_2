@@ -18,40 +18,22 @@ public class ProductController {
     @GetMapping  //  Kim
     //Consultar tots els productes
 
-    @GetMapping //  mark
-    public ResponseEntity<Product> getProductById(@PathVariable long id) {
-        log.info("GET /Products/{} - Obtener Productos", id);
-
-        Product product = ProductService.findById(id);
-        if (product == null) {
-            log.warn("Producte amb id {} no trobat", id);
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(product);
-    }
+    
 
     @PostMapping //  Kim
     public
     //Afegir un producte
 
-    @PutMapping("/{id}") //  mark
-    //Modificar tots els camps d’un producte
-    public ResponseEntity<Void> updateProducte(
-            @PathVariable long id,
-            @RequestBody
-            )
+    
 
-
-    @PatchMapping //  Kim
+   // @PatchMapping //  Kim
     //Modificar l’estoc de productes
 
 
-    @PatchMapping //  mark
-    //Modificar el preu d’un producte
+    
 
-    @DeleteMapping //  Kim
+    //@DeleteMapping //  Kim
     //Borrat físic d'un producte
 
-    @DeleteMapping //  mark
-    //Borrat lògic d’un producte
+    
 }
