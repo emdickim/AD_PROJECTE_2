@@ -208,4 +208,46 @@ public class ProductService {
         }
         return dtos;
     }
+    public List<ProductDTO> searchByRatingRange(Double ratingMin, Double ratingMax,
+                                                String camp, String order, int limit) {
+        Sort sort = order.equalsIgnoreCase("asc")
+                ? Sort.by(camp).ascending()
+                : Sort.by(camp).descending();
+
+        Pageable pageable = PageRequest.of(0, limit, sort);
+        List<Product> products = productRepository.findByRatingRange(ratingMin, ratingMax, pageable);
+
+        List<ProductDTO> dtos = new ArrayList<>();
+        for (Product p : products) {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setDescription(p.getDescription());
+            dto.setStock(p.getStock());
+            dto.setPrice(p.getPrice());
+            dto.setRating(p.getRating());
+            dto.setCondition(p.getCondition());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    public List<ProductDTO> top10NewProducts() {
+        Pageable pageable = PageRequest.of(0, 10);
+        List<Product> products = productRepository.findTop10NewProducts(pageable);
+
+        List<ProductDTO> dtos = new ArrayList<>();
+        for (Product p : products) {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setDescription(p.getDescription());
+            dto.setStock(p.getStock());
+            dto.setPrice(p.getPrice());
+            dto.setRating(p.getRating());
+            dto.setCondition(p.getCondition());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 }

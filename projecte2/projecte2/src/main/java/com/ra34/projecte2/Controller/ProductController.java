@@ -218,4 +218,29 @@ public class ProductController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @GetMapping("/search/rating")
+    public ResponseEntity<?> searchByRatingRange(
+            @RequestParam Double ratingMin,
+            @RequestParam Double ratingMax,
+            @RequestParam String camp,
+            @RequestParam String order,
+            @RequestParam int limit) {
+        try {
+            List<ProductDTO> products = productService.searchByRatingRange(ratingMin, ratingMax, camp, order, limit);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/top10/new")
+    public ResponseEntity<?> top10NewProducts() {
+        try {
+            List<ProductDTO> products = productService.top10NewProducts();
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
 }
