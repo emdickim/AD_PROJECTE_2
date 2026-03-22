@@ -1,5 +1,6 @@
 package com.ra34.projecte2.Controller;
 
+import com.ra34.projecte2.Model.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -195,6 +196,26 @@ public class ProductController {
             log.error("Error carregant CSV", e);
             ErrorDTO error = new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage());
             return ResponseEntity.badRequest().body(error);
+        }
+    }
+
+    @GetMapping("/search/condition")
+    public ResponseEntity<?> searchByCondition(@RequestParam Condition condition) {
+        try {
+            List<ProductDTO> products = productService.searchByCondition(condition);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/search/order")
+    public ResponseEntity<?> searchByRatingOrder(@RequestParam String order) {
+        try {
+            List<ProductDTO> products = productService.searchByRatingOrder(order);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 }

@@ -171,4 +171,41 @@ public class ProductService {
             throw new RuntimeException("Error a la línia " + lineNumber + ": " + e.getMessage());
         }
     }
+    public List<ProductDTO> searchByCondition(Condition condition) {
+        List<Product> products = productRepository.findByConditionAndStatusTrue(condition);
+        List<ProductDTO> dtos = new ArrayList<>();
+        for (Product p : products) {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setDescription(p.getDescription());
+            dto.setStock(p.getStock());
+            dto.setPrice(p.getPrice());
+            dto.setRating(p.getRating());
+            dto.setCondition(p.getCondition());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+    public List<ProductDTO> searchByRatingOrder(String order) {
+        Sort sort = order.equalsIgnoreCase("asc")
+                ? Sort.by("rating").ascending()
+                : Sort.by("rating").descending();
+
+        List<Product> products = productRepository.findByStatusTrue(sort);
+
+        List<ProductDTO> dtos = new ArrayList<>();
+        for (Product p : products) {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setDescription(p.getDescription());
+            dto.setStock(p.getStock());
+            dto.setPrice(p.getPrice());
+            dto.setRating(p.getRating());
+            dto.setCondition(p.getCondition());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 }
