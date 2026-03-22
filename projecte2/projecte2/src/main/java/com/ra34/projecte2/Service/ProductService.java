@@ -12,17 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ra34.projecte2.Model.Product;
 import com.ra34.projecte2.Model.ProductDTO;
-import com.ra34.projecte2.Controller.ErrorDTO;
 import com.ra34.projecte2.Model.Condition;
-
 import com.ra34.projecte2.Repository.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -34,7 +29,12 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findByStatusTrue();
+    }
+
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
     }
 
     public Product save(Product product) {
@@ -43,24 +43,49 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateStock(Long id, Integer stock) {
-        // Busquem el producte per id
+    public Product updateProduct(Long id, Product updatedProduct) {
         Product product = productRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
-        
-        // Actualitzem només l'estoc
+                .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
+
+        product.setName(updatedProduct.getName());
+        product.setDescription(updatedProduct.getDescription());
+        product.setStock(updatedProduct.getStock());
+        product.setPrice(updatedProduct.getPrice());
+        product.setRating(updatedProduct.getRating());
+        product.setCondition(updatedProduct.getCondition());
+        product.setDataUpdated(LocalDateTime.now());
+
+        return productRepository.save(product);
+    }
+
+    public Product updateStock(Long id, Integer stock) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
+
         product.setStock(stock);
         product.setDataUpdated(LocalDateTime.now());
-        
+
+        return productRepository.save(product);
+    }
+
+    public Product updatePrice(Long id, Double price) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
+
+        product.setPrice(price);
+        product.setDataUpdated(LocalDateTime.now());
+
         return productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
-    // Comprovem que existeix abans d'esborrar
         Product product = productRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
-        
-        productRepository.deleteById(id);
+                .orElseThrow(() -> new RuntimeException("Producte no trobat amb id: " + id));
+
+        product.setStatus(false); // 👈 en lugar de borrar
+        product.setDataUpdated(LocalDateTime.now());
+
+        productRepository.save(product);
     }
 
     public List<Product> searchByName(String prefix) {
@@ -68,14 +93,12 @@ public class ProductService {
     }
 
     public List<ProductDTO> searchByOrder(String order) {
-    // Creem el Sort segons el valor de order
-        Sort sort = order.equalsIgnoreCase("asc") 
-            ? Sort.by("price").ascending() 
-            : Sort.by("price").descending();
+        Sort sort = order.equalsIgnoreCase("asc")
+                ? Sort.by("price").ascending()
+                : Sort.by("price").descending();
 
         List<Product> products = productRepository.findByStatusTrue(sort);
 
-        // Convertim Product → ProductDTO
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
             ProductDTO dto = new ProductDTO();
@@ -91,21 +114,18 @@ public class ProductService {
         return productDTOs;
     }
 
-    public List<ProductDTO> searchByPriceRange(Double priceMin, Double priceMax, 
-                                            String camp, String order, int limit) {
-        // Creem el Sort (ordre)
-        Sort sort = order.equalsIgnoreCase("asc") 
-            ? Sort.by(camp).ascending() 
-            : Sort.by(camp).descending();
-        
-        // Pageable per limitar resultats
+    public List<ProductDTO> searchByPriceRange(Double priceMin, Double priceMax,
+                                               String camp, String order, int limit) {
+
+        Sort sort = order.equalsIgnoreCase("asc")
+                ? Sort.by(camp).ascending()
+                : Sort.by(camp).descending();
+
         Pageable pageable = PageRequest.of(0, limit, sort);
-        
-        List<Product> products = productRepository.findByPriceRange(
-            priceMin, priceMax, camp, pageable
-        );
-        
-        // Convertim a DTO
+
+        List<Product> products = productRepository
+                .findByPriceBetweenAndStatusTrue(priceMin, priceMax, pageable);
+
         List<ProductDTO> dtos = new ArrayList<>();
         for (Product p : products) {
             ProductDTO dto = new ProductDTO();
@@ -121,13 +141,10 @@ public class ProductService {
         return dtos;
     }
 
-
-
-
     @Transactional
     public int carregaMassivaCsv(MultipartFile file) throws IOException {
         List<Product> products = new ArrayList<>();
-        int lineNumber = 0; 
+        int lineNumber = 0;
 
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
@@ -151,7 +168,6 @@ public class ProductService {
             return products.size();
 
         } catch (Exception e) {
-            // Rellacem amb el número de línia → @Transactional fa rollback
             throw new RuntimeException("Error a la línia " + lineNumber + ": " + e.getMessage());
         }
     }

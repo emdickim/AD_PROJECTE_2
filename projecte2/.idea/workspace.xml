@@ -5,43 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c66f19ae-d205-4228-b131-6464b0ccb57c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../projecte2-fake/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Model/Condition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Model/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Repository/ProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/checksums/md5-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/checksums/sha1-checksums.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/nb-cache/projecte2-1742129075/project-info.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/nb-cache/subprojects.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/Projecte2Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/controller/ProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/model/Condition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/model/Product.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/repository/ProductRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ra34/projecte2/service/ProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ra34/projecte2/Projecte2ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/projecte2/src/main/java/com/ra34/projecte2/Service/ProductService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,21 +31,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "markTimblau"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;markTimblau&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/emdickim/AD_PROJECTE_2.git",
-    "accountId": "6c2e5b68-1548-407a-b183-2ecbcd740a93"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/emdickim/AD_PROJECTE_2.git&quot;,
+    &quot;accountId&quot;: &quot;6c2e5b68-1548-407a-b183-2ecbcd740a93&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3B25gvIGNppuIXZjNZNwsopxHNB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -90,7 +58,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "mark",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Usuaris/MarkTimblau/Documents/M6/Acceso_A_Datos/AD_PROJECTE_2/projecte2",

@@ -9,20 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import com.ra34.projecte2.Service.ProductService;
 import com.ra34.projecte2.Model.Product;
 import com.ra34.projecte2.Model.ProductDTO;
-
-
 
 @RestController
 @RequestMapping("/products")
@@ -33,19 +26,29 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/all")  //  Kim
+    @GetMapping("/all")
     public ResponseEntity<List<Product>> allProducts() {
-
         try {
             List<Product> products = productService.getAllProducts();
-            
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        try {
+            Product product = productService.getProductById(id);
+            return ResponseEntity.ok(product);
+        } catch (RuntimeException e) {
+            ErrorDTO error = new ErrorDTO(
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> addProduct(@RequestBody Product product) {
@@ -53,63 +56,81 @@ public class ProductController {
             Product savedProduct = productService.save(product);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
         } catch (Exception e) {
-            // Error inesperat → 500
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(), 
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
     }
-    
 
-    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(
+            @PathVariable Long id,
+            @RequestBody Product product) {
+        try {
+            Product updated = productService.updateProduct(id, product);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            ErrorDTO error = new ErrorDTO(
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+    }
 
-    // @PatchMapping //  Kim
     @PatchMapping("/{id}/stock")
     public ResponseEntity<?> updateStock(@PathVariable Long id, @RequestParam Integer stock) {
         try {
             Product updatedProduct = productService.updateStock(id, stock);
             return ResponseEntity.ok(updatedProduct);
         } catch (RuntimeException e) {
-            // Producte no trobat → 404
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.NOT_FOUND.value(),
-                e.getMessage()
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         } catch (Exception e) {
-            // Error inesperat → 500
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
     }
 
+    @PatchMapping("/{id}/price")
+    public ResponseEntity<?> updatePrice(
+            @PathVariable Long id,
+            @RequestParam Double price) {
+        try {
+            Product updated = productService.updatePrice(id, price);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            ErrorDTO error = new ErrorDTO(
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+    }
 
-
-    
-
-    //@DeleteMapping //  Kim
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         try {
             productService.deleteProduct(id);
-            return ResponseEntity.noContent().build(); 
+            return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
-            // Producte no trobat → 404
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.NOT_FOUND.value(),
-                e.getMessage()
+                    HttpStatus.NOT_FOUND.value(),
+                    e.getMessage()
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         } catch (Exception e) {
-            // Error inesperat → 500
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
@@ -122,12 +143,13 @@ public class ProductController {
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
     }
+
     @GetMapping("/search/order")
     public ResponseEntity<?> searchByOrder(@RequestParam String order) {
         try {
@@ -135,14 +157,14 @@ public class ProductController {
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
-    
     }
-    @GetMapping("/search/order")
+
+    @GetMapping("/search/price-range")
     public ResponseEntity<?> searchByPriceRange(
             @RequestParam Double priceMin,
             @RequestParam Double priceMax,
@@ -151,13 +173,13 @@ public class ProductController {
             @RequestParam int limit) {
         try {
             List<ProductDTO> products = productService.searchByPriceRange(
-                priceMin, priceMax, camp, order, limit
+                    priceMin, priceMax, camp, order, limit
             );
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             ErrorDTO error = new ErrorDTO(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                e.getMessage()
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    e.getMessage()
             );
             return ResponseEntity.internalServerError().body(error);
         }
@@ -175,5 +197,4 @@ public class ProductController {
             return ResponseEntity.badRequest().body(error);
         }
     }
-    
 }
