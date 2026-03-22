@@ -3,6 +3,7 @@ package com.ra34.projecte2.Repository;
 import java.util.List;
 
 import com.ra34.projecte2.Model.Condition;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,4 +35,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.condition = com.ra34.projecte2.Model.Condition.NEW AND p.status = true ORDER BY p.rating DESC")
     List<Product> findTop10NewProducts(Pageable pageable);
+
+    Page<Product> findByStatusTrue(Pageable pageable);
 }

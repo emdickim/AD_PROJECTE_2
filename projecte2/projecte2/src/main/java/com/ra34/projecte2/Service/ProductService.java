@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -250,4 +251,26 @@ public class ProductService {
         }
         return dtos;
     }
+    public List<ProductDTO> getProductsPaginated(int page) {
+        int pageSize = 5;
+        Pageable pageable = PageRequest.of(page, pageSize);
+                                       
+        Page<Product> productPage = productRepository.findByStatusTrue(pageable);
+        List<ProductDTO> dtos = new ArrayList<>();
+
+        for (Product p : productPage.getContent()) {
+            ProductDTO dto = new ProductDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setDescription(p.getDescription());
+            dto.setStock(p.getStock());
+            dto.setPrice(p.getPrice());
+            dto.setRating(p.getRating());
+            dto.setCondition(p.getCondition());
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
 }

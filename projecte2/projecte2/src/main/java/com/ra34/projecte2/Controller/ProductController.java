@@ -243,4 +243,14 @@ public class ProductController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<?> getProductsPaginated(@RequestParam(defaultValue = "0") int page) {
+        try {
+            List<ProductDTO> products = productService.getProductsPaginated(page);
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
 }
