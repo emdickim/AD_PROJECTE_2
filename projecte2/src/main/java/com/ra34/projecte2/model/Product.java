@@ -1,4 +1,4 @@
-package com.ra34.projecte2.model;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Product {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
