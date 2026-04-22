@@ -24,7 +24,7 @@ public class User {
     private LocalDateTime dataCreated;
     private LocalDateTime dataUpdated;
 
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Customer customer;
 
     public Long getId() {

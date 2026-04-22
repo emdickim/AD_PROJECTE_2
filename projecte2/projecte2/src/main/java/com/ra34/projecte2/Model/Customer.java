@@ -20,7 +20,7 @@ public class Customer {
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true)
-    private Long user_id;
+    private User user;
 
     private String firstName;
     private String lastName;
