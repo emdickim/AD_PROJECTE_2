@@ -1,10 +1,13 @@
 package com.ra34.projecte2.Model;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -20,6 +23,9 @@ public class User {
     private Boolean status;
     private LocalDateTime dataCreated;
     private LocalDateTime dataUpdated;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Customer customer;
 
     public Long getId() {
         return id;
@@ -68,5 +74,6 @@ public class User {
     public void setDataUpdated(LocalDateTime dataUpdated) {
         this.dataUpdated = dataUpdated;
     }
-}
+
+    
 }
