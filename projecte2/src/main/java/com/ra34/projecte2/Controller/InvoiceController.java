@@ -2,6 +2,7 @@ package com.ra34.projecte2.Controller;
 
 import com.ra34.projecte2.Model.Invoice;
 import com.ra34.projecte2.Service.InvoiceService;
+import com.ra34.projecte2.DTO.ErrorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

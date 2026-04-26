@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ra34.projecte2.Model.Product;
-import com.ra34.projecte2.Model.ProductDTO;
+import com.ra34.projecte2.DTO.ProductDTO;
 import com.ra34.projecte2.Model.Condition;
 import com.ra34.projecte2.Repository.ProductRepository;
 
