@@ -1,6 +1,5 @@
 package com.ra34.projecte2.Controller;
 
-import com.ra34.projecte2.Model.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
@@ -201,7 +200,7 @@ public class ProductController {
     }
 
     @GetMapping("/search/condition")
-    public ResponseEntity<?> searchByCondition(@RequestParam Condition condition) {
+    public ResponseEntity<?> searchByCondition(@RequestParam String condition) {
         try {
             List<ProductDTO> products = productService.searchByCondition(condition);
             return ResponseEntity.ok(products);

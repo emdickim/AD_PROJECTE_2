@@ -17,12 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ra34.projecte2.Model.Product;
-<<<<<<< HEAD
 import com.ra34.projecte2.DTO.ProductDTO;
-import com.ra34.projecte2.Model.Condition;
-=======
-import com.ra34.projecte2.Model.ProductDTO;
->>>>>>> 0ed80e1dfec8c7d2a89035c913ec9ee52a216d99
 import com.ra34.projecte2.Repository.ProductRepository;
 
 import jakarta.transaction.Transactional;

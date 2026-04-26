@@ -1,7 +1,5 @@
 package com.ra34.projecte2.DTO;
 
-import com.ra34.projecte2.Model.Condition;
-
 public class ProductDTO {
 
     private Long id;
@@ -10,7 +8,7 @@ public class ProductDTO {
     private Integer stock;
     private Double price;
     private Double rating;
-    private Condition condition;
+    private String condition;
 
     public Long getId() {
         return id;
@@ -60,11 +58,11 @@ public class ProductDTO {
         this.rating = rating;
     }
 
-    public Condition getCondition() {
+    public String getCondition() {
         return condition;
     }
 
-    public void setCondition(Condition condition) {
+    public void setCondition(String condition) {
         this.condition = condition;
     }
 }
