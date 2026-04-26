@@ -18,11 +18,11 @@ public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "orderId", nullable = false, unique = true)
-    private Order order;
+    private long order;
 
     @Column(nullable = false, unique = true)
     private String invoiceNumber;
@@ -36,11 +36,11 @@ public class Invoice {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal totalWithTax;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public Order getOrder() { return order; }
-    public void setOrder(Order order) { this.order = order; }
+    public long getOrder() { return order; }
+    public void setOrder(long order) { this.order = order; }
 
     public String getInvoiceNumber() { return invoiceNumber; }
     public void setInvoiceNumber(String invoiceNumber) { this.invoiceNumber = invoiceNumber; }
