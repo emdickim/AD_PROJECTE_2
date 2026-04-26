@@ -1,16 +1,22 @@
     package com.ra34.projecte2.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ra34.projecte2.DTO.AddRolesToUserRequest;
+import com.ra34.projecte2.DTO.RoleDTO;
 import com.ra34.projecte2.DTO.UserDTO;
+import com.ra34.projecte2.DTO.UserWithRolesDTO;
 import com.ra34.projecte2.Model.CreateUserRequest;
 import com.ra34.projecte2.Model.Customer;
+import com.ra34.projecte2.Model.Role;
 import com.ra34.projecte2.Model.User;
 import com.ra34.projecte2.Repository.CustomerRepository;
+import com.ra34.projecte2.Repository.RoleRepository;
 import com.ra34.projecte2.Repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -91,5 +97,49 @@ public List<UserDTO> getAllUsers() {
         User updated = userRepository.save(user);
 
         return toDTO(updated);
+    }
+    @Autowired
+private RoleRepository roleRepository;
+
+@Transactional
+public UserWithRolesDTO addRolesToUser(AddRolesToUserRequest request) {
+
+    // 1. Verifica que el usuario existe
+    User user = userRepository.findById(request.getUserId())
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + request.getUserId()));
+
+    // 2. Busca los roles y los añade
+    for (Long roleId : request.getRoleIds()) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado con id: " + roleId));
+
+        // Evita duplicados
+        if (!user.getRoles().contains(role)) {
+            user.getRoles().add(role);
+        }
+    }
+
+    userRepository.save(user);
+
+    return toUserWithRolesDTO(user);
+}
+
+    private UserWithRolesDTO toUserWithRolesDTO(User user) {
+        UserWithRolesDTO dto = new UserWithRolesDTO();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setStatus(user.getStatus());
+
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (Role role : user.getRoles()) {
+            RoleDTO roleDTO = new RoleDTO();
+            roleDTO.setId(role.getId());
+            roleDTO.setName(role.getName());
+            roleDTO.setDescription(role.getDescription());
+            roleDTOs.add(roleDTO);
+        }
+
+        dto.setRoles(roleDTOs);
+        return dto; 
     }
 }

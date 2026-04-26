@@ -7,12 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ra34.projecte2.DTO.AddRolesToUserRequest;
 import com.ra34.projecte2.DTO.UserDTO;
+import com.ra34.projecte2.DTO.UserWithRolesDTO;
 import com.ra34.projecte2.Model.CreateUserRequest;
 import com.ra34.projecte2.Model.User;
 import com.ra34.projecte2.Service.UserService;
@@ -55,4 +58,13 @@ public class UserController {
         }
     }
 
+    @PostMapping("/roles")
+    public ResponseEntity<UserWithRolesDTO> addRolesToUser(@RequestBody AddRolesToUserRequest request) {
+        try {
+            UserWithRolesDTO response = userService.addRolesToUser(request);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
