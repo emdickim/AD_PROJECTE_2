@@ -8,7 +8,8 @@ public class ProductDTO {
     private Integer stock;
     private Double price;
     private Double rating;
-    private Condition condition;
+    private String condition;
+    private Boolean status;
 
     public Long getId() {
         return id;
@@ -58,11 +59,19 @@ public class ProductDTO {
         this.rating = rating;
     }
 
-    public Condition getCondition() {
+    public String getCondition() {
         return condition;
     }
 
-    public void setCondition(Condition condition) {
+    public void setCondition(String condition) {
         this.condition = condition;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

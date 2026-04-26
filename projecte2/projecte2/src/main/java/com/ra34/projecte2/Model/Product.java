@@ -1,13 +1,12 @@
 package com.ra34.projecte2.Model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import java.time.LocalDateTime;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -23,9 +22,7 @@ public class Product {
     private Integer stock;
     private Double price;
     private Double rating;
-
-    @Enumerated(value = EnumType.STRING)
-    private Condition condition;
+    private String condition;
 
     private Boolean status;
 
@@ -50,8 +47,8 @@ public class Product {
     public Double getRating() { return rating; }
     public void setRating(Double rating) { this.rating = rating; }
 
-    public Condition getCondition() { return condition; }
-    public void setCondition(Condition condition) { this.condition = condition; }
+    public String getCondition() { return condition; }
+    public void setCondition(String condition) { this.condition = condition; }
 
     public Boolean getStatus() { return status; }
     public void setStatus(Boolean status) { this.status = status; }

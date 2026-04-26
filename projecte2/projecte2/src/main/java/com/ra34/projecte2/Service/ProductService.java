@@ -10,15 +10,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ra34.projecte2.Model.Product;
+<<<<<<< HEAD
 import com.ra34.projecte2.DTO.ProductDTO;
 import com.ra34.projecte2.Model.Condition;
+=======
+import com.ra34.projecte2.Model.ProductDTO;
+>>>>>>> 0ed80e1dfec8c7d2a89035c913ec9ee52a216d99
 import com.ra34.projecte2.Repository.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -160,7 +164,7 @@ public class ProductService {
                     product.setStock(Integer.parseInt(fields[2]));
                     product.setPrice(Double.parseDouble(fields[3]));
                     product.setRating(Double.parseDouble(fields[4]));
-                    product.setCondition(Condition.valueOf(fields[5].trim().toUpperCase()));
+                    product.setCondition(String.valueOf(fields[5].trim().toUpperCase()));
                     product.setStatus(true);
                     products.add(product);
                 }
@@ -172,7 +176,7 @@ public class ProductService {
             throw new RuntimeException("Error a la línia " + lineNumber + ": " + e.getMessage());
         }
     }
-    public List<ProductDTO> searchByCondition(Condition condition) {
+    public List<ProductDTO> searchByCondition(String condition) {
         List<Product> products = productRepository.findByConditionAndStatusTrue(condition);
         List<ProductDTO> dtos = new ArrayList<>();
         for (Product p : products) {
