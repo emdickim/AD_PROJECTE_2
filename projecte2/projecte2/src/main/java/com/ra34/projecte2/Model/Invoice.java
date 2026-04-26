@@ -22,7 +22,7 @@ public class Invoice {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "orderId", nullable = false, unique = true)
-    private long order;
+    private Order order;
 
     @Column(nullable = false, unique = true)
     private String invoiceNumber;
@@ -39,8 +39,8 @@ public class Invoice {
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
-    public long getOrder() { return order; }
-    public void setOrder(long order) { this.order = order; }
+    public Order getOrder() { return order; }
+    public void setOrder(Order order) { this.order = order; }
 
     public String getInvoiceNumber() { return invoiceNumber; }
     public void setInvoiceNumber(String invoiceNumber) { this.invoiceNumber = invoiceNumber; }

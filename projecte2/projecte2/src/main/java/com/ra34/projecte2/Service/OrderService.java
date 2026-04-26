@@ -69,7 +69,7 @@ public class OrderService {
     private OrderResponseDTO toDTO(Order order, List<OrderItem> items) {
         OrderResponseDTO dto = new OrderResponseDTO();
         dto.setId(order.getId());
-        dto.setCustomerId(order.getCustomerId());
+        dto.setCustomerId(order.getCustomer() != null ? order.getCustomer().getId() : null);
         dto.setTotalAmount(order.getTotalAmount());
         dto.setOrderStatus(order.getOrderStatus().name());
 
