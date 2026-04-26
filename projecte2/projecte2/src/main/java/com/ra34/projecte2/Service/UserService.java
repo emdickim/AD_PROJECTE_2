@@ -1,6 +1,7 @@
     package com.ra34.projecte2.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ra34.projecte2.Model.CreateUserRequest;
 import com.ra34.projecte2.Model.Customer;
 import com.ra34.projecte2.Model.User;
+import com.ra34.projecte2.Model.UserDTO;
 import com.ra34.projecte2.Repository.CustomerRepository;
 import com.ra34.projecte2.Repository.UserRepository;
 
@@ -60,6 +62,39 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public List<UserDTO> getAllUsers() {
+    return userRepository.findAll()
+        .stream()
+        .map(this::toDTO)
+        .toList();
+}
+
+    private UserDTO toDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setStatus(user.getStatus());
+        dto.setDataCreated(user.getDataCreated());
+        dto.setDataUpdated(user.getDataUpdated());
+        dto.setRoleIds(user.getRoles().stream().map(role -> role.getId()).toList());
+        return dto;
+    }
+
+    public UserDTO editUser(Long id, UserDTO userDTO) {
+
+    User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+    user.setEmail(userDTO.getEmail());
+    user.setStatus(userDTO.getStatus());
+    user.setDataUpdated(LocalDateTime.now());
+
+    User updated = userRepository.save(user);
+
+    return toDTO(updated);
+}
+
+
 
 
 
