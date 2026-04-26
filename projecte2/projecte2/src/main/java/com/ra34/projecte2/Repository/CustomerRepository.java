@@ -7,5 +7,5 @@ import com.ra34.projecte2.Model.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    
+ 
 }

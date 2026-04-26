@@ -1,4 +1,4 @@
-package com.ra34.projecte2.Model;
+package com.ra34.projecte2.DTO;
 
 public class ProductDTO {
 

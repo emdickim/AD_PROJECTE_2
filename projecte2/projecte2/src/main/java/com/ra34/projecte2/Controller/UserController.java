@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ra34.projecte2.DTO.UserDTO;
 import com.ra34.projecte2.Model.CreateUserRequest;
 import com.ra34.projecte2.Model.User;
-import com.ra34.projecte2.Model.UserDTO;
 import com.ra34.projecte2.Service.UserService;
 
 
